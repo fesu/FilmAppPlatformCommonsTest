@@ -4,19 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.settings.SettingsFragment">
+    tools:context=".ui.settings.SettingsFragment"
+    android:paddingTop="@dimen/activity_horizontal_margin"
+    android:paddingStart="@dimen/activity_vertical_margin"
+    android:paddingEnd="@dimen/activity_vertical_margin"
+    android:background="@color/screen_background_color">
 
-    <TextView
-        android:id="@+id/text_settings"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switchTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_dark_mode"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

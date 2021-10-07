@@ -72,6 +72,8 @@ class MoviesAdapter(movieList: ArrayList<Movie>?, context: Context) :
         holder.binding.tvName.text = movie.title
         holder.binding.tvDescription.text = movie.description
         holder.binding.tvRtScore.text = movie.rt_score
+        holder.binding.tvReleaseDate.text = movie.release_date
+        holder.binding.tvRunningTime.text = context.getString(R.string.title_duration, movie.running_time)
 
         Glide.with(context).load(movie.movie_banner).into(holder.binding.ivMovie)
 

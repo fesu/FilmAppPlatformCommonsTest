@@ -11,5 +11,6 @@
     <string name="title_release_year">Year : %1$s</string>
     <string name="title_duration">%1$s Minutes</string>
     <string name="title_score">%1$s/100</string>
+    <string name="title_dark_mode">Dark Mode</string>
 
 </resources>
