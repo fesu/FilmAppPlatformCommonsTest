@@ -110,7 +110,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="7"
@@ -133,27 +136,17 @@
 
                     </LinearLayout>
 
-                    <FrameLayout
+                    <TextView
+                        android:id="@+id/tvRtScore"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:padding="5dp"
+                        android:gravity="center"
                         android:layout_gravity="center"
-                        android:padding="5dp">
-                        <!--<ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:src="@drawable/ic_score_bg_fill"
-                            android:layout_gravity="center"/>-->
-                        <TextView
-                            android:id="@+id/tvRtScore"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:padding="2dp"
-                            android:gravity="center"
-                            app:drawableStartCompat="@drawable/ic_score_bg_fill"
-                            android:drawablePadding="5dp"/>
-                    </FrameLayout>
+                        app:drawableStartCompat="@drawable/ic_score_bg_fill"
+                        android:drawablePadding="5dp"/>
                 </LinearLayout>
 
 
