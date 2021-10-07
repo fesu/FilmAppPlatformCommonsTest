@@ -5,4 +5,11 @@
     <string name="title_movie_details">Movie Details</string>
     <string name="title_notifications">Notifications</string>
     <string name="movie_image_desc">Movie Image</string>
+
+    <string name="title_director">Directed by: %1$s</string>
+    <string name="title_producer">Produced by: %1$s</string>
+    <string name="title_release_year">Year : %1$s</string>
+    <string name="title_duration">%1$s Minutes</string>
+    <string name="title_score">%1$s/100</string>
+
 </resources>

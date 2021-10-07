@@ -7,14 +7,24 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.movieapp.ui.home.HomeFragment"
+        android:name="com.movieapp.ui.home.view.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_movie_details"
+            app:destination="@id/navigation_movie_details" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.movieapp.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/navigation_movie_details"
+        android:name="com.movieapp.ui.moviedetails.view.MovieDetailsFragment"
+        android:label="@string/title_movie_details"
+        tools:layout="@layout/fragment_movie_details" />
 
 </navigation>

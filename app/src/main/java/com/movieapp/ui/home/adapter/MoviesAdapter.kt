@@ -77,7 +77,9 @@ class MoviesAdapter(movieList: ArrayList<Movie>?, context: Context) :
 
         // Show Movie details screen
         holder.binding.root.setOnClickListener{ view ->
-            view.findNavController().navigate(R.id.action_navigation_home_to_navigation_movie_details)
+            val bundle = Bundle()
+            bundle.putString("movie", Gson().toJson(movie))
+            view.findNavController().navigate(R.id.action_navigation_home_to_navigation_movie_details, bundle)
         }
 
     }

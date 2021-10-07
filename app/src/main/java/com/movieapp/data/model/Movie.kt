@@ -24,5 +24,17 @@ data class Movie(
     val description: String? = "",
 
     @Json(name = "rt_score")
-    val rt_score: String? = ""
+    val rt_score: String? = "",
+
+    @Json(name = "director")
+    val director: String? = "",
+
+    @Json(name = "producer")
+    val producer: String? = "",
+
+    @Json(name = "release_date")
+    val release_date: String? = "",
+
+    @Json(name = "running_time")
+    val running_time: String? = ""
 )
