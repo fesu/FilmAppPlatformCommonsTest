@@ -12,5 +12,9 @@
     <string name="title_duration">%1$s Minutes</string>
     <string name="title_score">%1$s/100</string>
     <string name="title_dark_mode">Dark Mode</string>
+    <string name="title_language">Language</string>
+    <string name="title_restart">Restart</string>
+    <string name="restart_dialog_title">Language Changed</string>
+    <string name="restart_dialog_message">You need to restart an application to update the Language on UI.</string>
 
 </resources>

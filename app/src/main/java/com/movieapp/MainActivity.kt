@@ -1,14 +1,16 @@
 package com.movieapp
 
+import android.content.Context
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.movieapp.databinding.ActivityMainBinding
+import com.movieapp.utils.LocaleHelperNew
 import com.movieapp.utils.PrefSettings
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,6 +23,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+       /* val config = resources.configuration
+        val lang = "fr" // your language code
+        val locale = Locale(lang)
+        Locale.setDefault(locale)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+            config.setLocale(locale)
+        else
+            config.locale = locale
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            createConfigurationContext(config)
+        resources.updateConfiguration(config, resources.displayMetrics)*/
+
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
@@ -37,6 +53,30 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         setTheme()
+//        setLanguage()
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(LocaleHelperNew.onAttach(newBase));
+    }
+
+    private fun setLanguage() {
+        try {
+            var selectedLanguage: String? = null
+            // Get previously Selected language by User
+            selectedLanguage = LocaleHelperNew.getLocale(this)
+            if (selectedLanguage != null) {
+                if (selectedLanguage == "en") {
+                    LocaleHelperNew.setLocale(this, "en")
+                }
+                else{
+                    LocaleHelperNew.setLocale(this, "fr")
+                }
+            }
+        }
+        catch (e:Exception){
+            e.printStackTrace()
+        }
     }
 
     private fun setTheme() {

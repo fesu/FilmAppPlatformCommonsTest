@@ -9,6 +9,7 @@ class PrefSettings {
 
     companion object {
         private const val movieAppPrefName = "MOVIE_PREF"
+        private const val SELECTED_LANGUAGE = "Locale.Helper.Selected.Language"
 
         /**
          *  Save Dark Mode Status
@@ -34,6 +35,33 @@ class PrefSettings {
             val sharedPref =
                 context.getSharedPreferences(movieAppPrefName, Context.MODE_PRIVATE)
             return sharedPref.getBoolean("isDarkModeOn", false)
+        }
+
+
+        /**
+         *  Save Locale to shared preference
+         *
+         * @param context
+         * @param locale
+         */
+        @JvmStatic fun saveLocale(context: Context?, locale: String?) {
+            val sharedPref =
+                context!!.getSharedPreferences(movieAppPrefName, Context.MODE_PRIVATE)
+            val editor = sharedPref.edit()
+            editor.putString(SELECTED_LANGUAGE, locale)
+            editor.apply()
+        }
+
+        /**
+         * Get Locale from shared preference
+         *
+         * @param context
+         * @return
+         */
+        @JvmStatic fun getLocale(context: Context?): String? {
+            val sharedPref =
+                context!!.getSharedPreferences(movieAppPrefName, Context.MODE_PRIVATE)
+            return sharedPref.getString(SELECTED_LANGUAGE, "en")
         }
 
     }

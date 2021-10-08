@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_home">Accueil</string>
+    <string name="app_name">Movie App</string>
+    <string name="title_settings">Paramètres</string>
+    <string name="title_movie_details">Détails du film</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="movie_image_desc">Image du film</string>
+    <string name="title_director">Réalisé par: %1$s</string>
+    <string name="title_producer">Produit par: %1$s</string>
+    <string name="title_release_year">Année : %1$s</string>
+    <string name="title_duration">%1$s Minutes</string>
+    <string name="title_score">%1$s/100</string>
+    <string name="title_dark_mode">Mode sombre</string>
+    <string name="title_language">Langue</string>
+    <string name="title_restart">Redémarrage</string>
+    <string name="restart_dialog_title">La langue a changé</string>
+    <string name="restart_dialog_message">Vous devez redémarrer une application pour mettre à jour la langue sur l\'interface utilisateur.</string>
+</resources>
