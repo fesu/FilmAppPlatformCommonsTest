@@ -10,7 +10,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.movieapp.databinding.ActivityMainBinding
-import com.movieapp.utils.LocaleHelperNew
+import com.movieapp.utils.LocaleHelper
 import com.movieapp.utils.PrefSettings
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,19 +23,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
-
-       /* val config = resources.configuration
-        val lang = "fr" // your language code
-        val locale = Locale(lang)
-        Locale.setDefault(locale)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
-            config.setLocale(locale)
-        else
-            config.locale = locale
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-            createConfigurationContext(config)
-        resources.updateConfiguration(config, resources.displayMetrics)*/
 
         setContentView(binding.root)
 
@@ -57,20 +44,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun attachBaseContext(newBase: Context?) {
-        super.attachBaseContext(LocaleHelperNew.onAttach(newBase));
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
     }
 
     private fun setLanguage() {
         try {
             var selectedLanguage: String? = null
             // Get previously Selected language by User
-            selectedLanguage = LocaleHelperNew.getLocale(this)
+            selectedLanguage = LocaleHelper.getLocale(this)
             if (selectedLanguage != null) {
                 if (selectedLanguage == "en") {
-                    LocaleHelperNew.setLocale(this, "en")
+                    LocaleHelper.setLocale(this, "en")
                 }
                 else{
-                    LocaleHelperNew.setLocale(this, "fr")
+                    LocaleHelper.setLocale(this, "fr")
                 }
             }
         }

@@ -2,14 +2,14 @@ package com.movieapp
 
 import android.app.Application
 import android.content.Context
-import com.movieapp.utils.LocaleHelperNew
+import com.movieapp.utils.LocaleHelper
 import dagger.hilt.android.HiltAndroidApp
 
 
 @HiltAndroidApp
 class App : Application(){
     override fun attachBaseContext(base: Context?) {
-        super.attachBaseContext(LocaleHelperNew.onAttach(base, "en"))
+        super.attachBaseContext(LocaleHelper.onAttach(base, "en"))
     }
 
     /*override fun attachBaseContext(base: Context?) {

@@ -8,14 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.movieapp.R
 import com.movieapp.databinding.FragmentSettingsBinding
-import com.movieapp.utils.LocaleHelperNew
+import com.movieapp.utils.LocaleHelper
 import com.movieapp.utils.PrefSettings
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,6 +24,7 @@ class SettingsFragment : Fragment() {
 
     private lateinit var settingsViewModel: SettingsViewModel
     private var _binding: FragmentSettingsBinding? = null
+    private var isLanguageSet:Boolean = false
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -89,7 +89,7 @@ class SettingsFragment : Fragment() {
 
         var selectedLanguage: String? = null
         // Get previously Selected language by User
-        selectedLanguage = LocaleHelperNew.getLocale(requireContext())
+        selectedLanguage = LocaleHelper.getLocale(requireContext())
 
         if (selectedLanguage != null) {
             if (selectedLanguage == "en") {
@@ -110,31 +110,25 @@ class SettingsFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                if (position == 0){
-                    LocaleHelperNew.setLocale(context!!, "en")
-                }
-                else{
-                    LocaleHelperNew.setLocale(context!!, "fr")
+                if (!isLanguageSet){
+                    isLanguageSet = true
+                    return
                 }
 
-//                showRestartAppAlert()
+                if (position == 0){
+                    LocaleHelper.setLocale(context!!, "en")
+                }
+                else{
+                    LocaleHelper.setLocale(context!!, "fr")
+                }
+
+                showRestartAppAlert()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 TODO("Not yet implemented")
             }
         }
-
-        /*binding.spnrLanguage.onItemClickListener =
-            AdapterView.OnItemClickListener { _, _, position, _ ->
-                if (position == 0){
-                    LocaleHelperNew.setLocale(requireContext(), "en")
-                } else{
-                    LocaleHelperNew.setLocale(requireContext(), "fr")
-                }
-                showRestartAppAlert()
-            }*/
-
 
     }
 
