@@ -1,9 +1,12 @@
 package com.movieapp.ui.moviedetails.view
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
@@ -43,16 +46,22 @@ class MovieDetailsFragment : Fragment() {
         if (arguments != null) {
             movie = Gson().fromJson(requireArguments().getString("movie"), Movie::class.java)
 
-            binding.tvName.text = movie!!.title
-            binding.tvDescription.text = movie!!.description
-            binding.tvRtScore.text = getString(R.string.title_score, movie!!.rt_score)
-            binding.tvDirector.text = getString(R.string.title_director, movie!!.director)
-            binding.tvProducer.text = getString(R.string.title_producer, movie!!.producer)
-            binding.tvReleaseDate.text = movie!!.release_date
-            binding.tvRunningTime.text = getString(R.string.title_duration, movie!!.running_time)
+            binding.movie = movie
+        }
+    }
 
-            context?.let { Glide.with(it).load(movie!!.movie_banner).into(binding.ivMovie) }
-            context?.let { Glide.with(it).load(movie!!.image).into(binding.ivMovieImage) }
+    /**
+     * Load Image using DataBinding with Glide
+     */
+    companion object {
+        @BindingAdapter("image")
+        @JvmStatic
+        fun setImage(image: ImageView, url: String?) {
+            if (!url.isNullOrEmpty()){
+
+                Glide.with(image.context).load(url).into(image)
+            }
+
         }
     }
 
