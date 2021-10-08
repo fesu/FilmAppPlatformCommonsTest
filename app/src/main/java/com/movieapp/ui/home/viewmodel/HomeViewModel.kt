@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.movieapp.data.model.Movie
 import com.movieapp.utils.NetworkHelper
 import com.movieapp.data.repository.MainRepository
+import com.movieapp.data.roomdb.RoomDbHelper
 import com.movieapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val mainRepository: MainRepository,
-    private val networkHelper: NetworkHelper
+    private val networkHelper: NetworkHelper,
+    private val roomDbHelper: RoomDbHelper
 ) : ViewModel() {
 
     private val _movies = MutableLiveData<Resource<List<Movie>>>()
@@ -38,8 +40,20 @@ class HomeViewModel @Inject constructor(
                         _movies.postValue(Resource.success(it.body()))
                     } else _movies.postValue(Resource.error(it.errorBody().toString(), null))
                 }
-            } else _movies.postValue(Resource.error("No internet connection", null))
+            } else {
+                // If no internet than get data from Local Room DB
+                val localData:List<Movie> = roomDbHelper.getCachedData()
+
+                if (localData.isNotEmpty()){
+                    _movies.postValue(Resource.success(localData))
+                }
+                else{
+                    // If even local db is empty than show No Internet message
+                    _movies.postValue(Resource.error("No internet connection", null))
+                }
+            }
         }
     }
+
 
 }

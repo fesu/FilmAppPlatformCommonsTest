@@ -9,17 +9,22 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.movieapp.data.model.Movie
+import com.movieapp.data.repository.MainRepository
+import com.movieapp.data.roomdb.RoomDbHelper
 import com.movieapp.databinding.FragmentHomeBinding
 import com.movieapp.ui.home.adapter.MoviesAdapter
 import com.movieapp.ui.home.viewmodel.HomeViewModel
+import com.movieapp.utils.NetworkHelper
 import com.movieapp.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModels()
     private lateinit var adapter: MoviesAdapter
+    private val roomDbHelper = RoomDbHelper(requireContext())
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -78,8 +83,12 @@ class HomeFragment : Fragment() {
 
     private fun renderList() {
         try {
+            roomDbHelper.cacheDataToRoomDB(allMovies)
             adapter.addData(allMovies)
             adapter.notifyDataSetChanged()
+
+            val list:List<Movie> = roomDbHelper.getCachedData()
+            Toast.makeText(context, "Count : " + list.count(), Toast.LENGTH_LONG).show()
         } catch (e: Exception) {
             e.printStackTrace()
         }

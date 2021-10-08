@@ -11,13 +11,10 @@ import com.google.gson.Gson
 import com.movieapp.R
 import com.movieapp.data.model.Movie
 import com.movieapp.databinding.FragmentMovieDetailsBinding
-import com.movieapp.ui.moviedetails.viewmodel.MovieDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MovieDetailsFragment : Fragment() {
-
-    private val movieDetailsViewModel: MovieDetailsViewModel by viewModels()
 
     private var _binding: FragmentMovieDetailsBinding? = null
     var movie:Movie? = null

@@ -1,40 +1,54 @@
 package com.movieapp.data.model
 
+import androidx.annotation.NonNull
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 
 /**
  * Data Class for All Movie details
  *
  * @property id
+ * @property title
+ * @property image
+ * @property movie_banner
+ * @property description
+ * @property rt_score
+ * @property director
+ * @property producer
+ * @property release_date
+ * @property running_time
  */
+@Entity(tableName="movie")
 data class Movie(
     @Json(name = "id")
-    val id: String? = "",
+    @PrimaryKey @NonNull var id: String = "",
 
     @Json(name = "title")
-    val title: String? = "",
+    @ColumnInfo(name = "title") var title: String? = "",
 
     @Json(name = "image")
-    val image: String? = "",
+    @ColumnInfo(name = "image") var image: String? = "",
 
     @Json(name = "movie_banner")
-    val movie_banner: String? = "",
+    @ColumnInfo(name = "movie_banner") var movie_banner: String? = "",
 
     @Json(name = "description")
-    val description: String? = "",
+    @ColumnInfo(name = "description") var description: String? = "",
 
     @Json(name = "rt_score")
-    val rt_score: String? = "",
+    @ColumnInfo(name = "rt_score") var rt_score: String? = "",
 
     @Json(name = "director")
-    val director: String? = "",
+    @ColumnInfo(name = "director") var director: String? = "",
 
     @Json(name = "producer")
-    val producer: String? = "",
+    @ColumnInfo(name = "producer") var producer: String? = "",
 
     @Json(name = "release_date")
-    val release_date: String? = "",
+    @ColumnInfo(name = "release_date") var release_date: String? = "",
 
     @Json(name = "running_time")
-    val running_time: String? = ""
+    @ColumnInfo(name = "running_time") var running_time: String? = ""
 )
