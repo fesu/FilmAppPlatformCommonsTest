@@ -7,7 +7,6 @@ import java.util.*
 
 object LocaleHelper {
 
-
     fun onAttach(context: Context?): Context? {
         val lang: String? = getPersistedData(context, Locale.getDefault().language)
         return setLocale(context, lang)

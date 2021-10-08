@@ -1,46 +1,28 @@
 package com.movieapp.ui.home.adapter
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.widget.FrameLayout
-import android.widget.Toast
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.movieapp.R
 import com.movieapp.data.model.Movie
 import com.movieapp.databinding.MovieListItemBinding
-import com.movieapp.ui.home.view.HomeFragmentDirections
 import java.util.*
 
 
 class MoviesAdapter(movieList: ArrayList<Movie>?, context: Context) :
-    RecyclerView.Adapter<MoviesAdapter.MyViewHolder>(){
+    RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     private var mMovies: ArrayList<Movie>
     private val context: Context
-//    private var navController: NavController? = null
 
     init {
         requireNotNull(movieList) { "Movie Data must not be null" }
         mMovies = movieList
         this.context = context
-//        navController =
-//            Navigation.findNavController((context as Activity), R.id.nav_host_fragment_activity_main)
-    }
-
-    class MyViewHolder(view: View?) : ViewHolder(view!!) {
-        var binding: MovieListItemBinding = MovieListItemBinding.bind(view!!)
     }
 
     fun addData(list: List<Movie>) {
@@ -48,8 +30,8 @@ class MoviesAdapter(movieList: ArrayList<Movie>?, context: Context) :
         mMovies.addAll(list)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        /*val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.movie_list_item, parent, false)
         val myViewHolder = MyViewHolder(itemView)
         val screenWidth =
@@ -59,34 +41,43 @@ class MoviesAdapter(movieList: ArrayList<Movie>?, context: Context) :
             (screenWidth * 0.50).toInt()
         )
         myViewHolder.binding.ivMovie.layoutParams = params
-        return MyViewHolder(itemView)
+        return MyViewHolder(itemView)*/
+
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = MovieListItemBinding.inflate(inflater)
+        return ViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
         return mMovies.size
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val movie = getItem(position)
-
-        holder.binding.tvName.text = movie.title
-        holder.binding.tvDescription.text = movie.description
-        holder.binding.tvRtScore.text = movie.rt_score
-        holder.binding.tvReleaseDate.text = movie.release_date
-        holder.binding.tvRunningTime.text = context.getString(R.string.title_duration, movie.running_time)
-
-        Glide.with(context).load(movie.movie_banner).into(holder.binding.ivMovie)
-
-        // Show Movie details screen
-        holder.binding.root.setOnClickListener{ view ->
-            val bundle = Bundle()
-            bundle.putString("movie", Gson().toJson(movie))
-            view.findNavController().navigate(R.id.action_navigation_home_to_navigation_movie_details, bundle)
-        }
-
-    }
-
     private fun getItem(position: Int): Movie {
         return mMovies[position]
     }
+
+//    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(mMovies.get(position))
+
+    inner class ViewHolder(val binding: MovieListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: Movie) {
+            binding.item = item
+//            binding.promotionItemSpecialLabel.visibility = if(item.isSpecial) View.VISIBLE else View.GONE
+            binding.executePendingBindings()
+        }
+    }
+
+    //    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(mMovies[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val movie = getItem(position)
+        holder.bind(movie)
+        // Show Movie details screen
+        holder.binding.root.setOnClickListener { view ->
+            val bundle = Bundle()
+            bundle.putString("movie", Gson().toJson(movie))
+            view.findNavController()
+                .navigate(R.id.action_navigation_home_to_navigation_movie_details, bundle)
+        }
+    }
+
 }

@@ -1,120 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@android:color/transparent">
+    xmlns:bind="http://schemas.android.com/tools">
 
-    <androidx.cardview.widget.CardView
+    <data>
+        <variable
+            name="item"
+            type="com.movieapp.data.model.Movie" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="@android:color/transparent">
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <FrameLayout
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/ivMovie"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/movie_image_desc"
-                    android:scaleType="centerCrop" />
+                    android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:background="@color/translucent"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical"
-                    android:padding="5dp">
-
-                    <TextView
-                        android:id="@+id/tvName"
+                    <ImageView
+                        android:id="@+id/ivMovie"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold"
-                        android:paddingTop="3dp"/>
+                        android:layout_height="200dp"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/movie_image_desc"
+                        android:scaleType="centerCrop"
+                        bind:image="@{item.movie_banner}"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:id="@+id/tvReleaseDate"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textColor="@android:color/white"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Caption"/>
+                        android:layout_gravity="bottom"
+                        android:background="@color/translucent"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="5dp">
 
                         <TextView
-                            android:id="@+id/tvRunningTime"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tvName"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
+                            android:text="@{item.title}"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Title"
                             android:textColor="@android:color/white"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                            android:layout_marginStart="15dp"/>
+                            android:textStyle="bold"
+                            android:paddingTop="3dp"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/tvReleaseDate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{item.release_date}"
+                                android:textStyle="bold"
+                                android:textColor="@android:color/white"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Caption"/>
+
+                            <TextView
+                                android:id="@+id/tvRunningTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{item.running_time}"
+                                android:textStyle="bold"
+                                android:textColor="@android:color/white"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                                android:layout_marginStart="15dp"/>
+                        </LinearLayout>
+
+
                     </LinearLayout>
 
-
-                </LinearLayout>
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|end"
-                    android:padding="5dp">
-                    <ImageView
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:src="@drawable/ic_score_bg_fill"
-                        android:layout_gravity="center"/>
-                    <TextView
-                        android:id="@+id/tvRtScore"
+                    <FrameLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                        android:padding="2dp"
-                        android:textColor="@android:color/white"
-                        android:gravity="center"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="top|end"
+                        android:padding="5dp">
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:src="@drawable/ic_score_bg_fill"
+                            android:layout_gravity="center"/>
+                        <TextView
+                            android:id="@+id/tvRtScore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{item.rt_score}"
+                            android:textStyle="bold"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                            android:padding="2dp"
+                            android:textColor="@android:color/white"
+                            android:gravity="center"
+                            android:layout_gravity="center"/>
+                    </FrameLayout>
+
                 </FrameLayout>
 
-            </FrameLayout>
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{item.description}"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:textStyle="bold"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:padding="5dp"
+                    android:gravity="top|start"/>
 
-            <TextView
-                android:id="@+id/tvDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="3"
-                android:textStyle="bold"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:padding="5dp"
-                android:gravity="top|start"/>
-
-        </LinearLayout>
-
-
-    </androidx.cardview.widget.CardView>
+            </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
