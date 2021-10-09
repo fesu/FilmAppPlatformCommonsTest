@@ -18,7 +18,10 @@ import com.movieapp.utils.LocaleHelper
 import com.movieapp.utils.PrefSettings
 import dagger.hilt.android.AndroidEntryPoint
 
-
+/**
+ * Setting screen to manage Dark mode & language preferences.
+ *
+ */
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
 

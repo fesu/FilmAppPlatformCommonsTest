@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.movieapp.data.model.Movie
-import com.movieapp.data.roomdb.RoomDbHelper
 import com.movieapp.databinding.FragmentHomeBinding
 import com.movieapp.ui.home.adapter.MoviesAdapter
 import com.movieapp.ui.home.viewmodel.HomeViewModel

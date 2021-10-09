@@ -19,7 +19,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-
+/**
+ * WorkManager class to sync data from API to local Room DB
+ *
+ * @constructor
+ * TODO
+ *
+ * @param context
+ * @param workerParams
+ */
 @HiltWorker
 class MyWorker @AssistedInject constructor(
     @Assisted context: Context, @Assisted workerParams: WorkerParameters

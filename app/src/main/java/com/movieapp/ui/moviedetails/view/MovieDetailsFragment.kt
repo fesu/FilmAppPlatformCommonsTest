@@ -13,6 +13,10 @@ import com.movieapp.data.model.Movie
 import com.movieapp.databinding.FragmentMovieDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * This Fragment will show the Single Movie details.
+ *
+ */
 @AndroidEntryPoint
 class MovieDetailsFragment : Fragment() {
 

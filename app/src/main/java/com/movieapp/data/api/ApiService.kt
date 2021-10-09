@@ -5,7 +5,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 /**
- * This class is used to define API names
+ * This class is used to define API Calls
  */
 interface ApiService {
 

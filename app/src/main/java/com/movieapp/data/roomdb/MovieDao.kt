@@ -3,6 +3,10 @@ package com.movieapp.data.roomdb
 import androidx.room.*
 import com.movieapp.data.model.Movie
 
+/**
+ * This is Data Access Object class to call custom queries to get Data from Room DB
+ *
+ */
 @Dao
 interface MovieDao {
     @Query("SELECT * FROM movie")

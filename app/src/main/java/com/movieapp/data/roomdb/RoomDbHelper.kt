@@ -7,6 +7,10 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+ * This is Singleton Helper class to access methods to save or get data from Local Room DB
+ *
+ */
 @Singleton
 class RoomDbHelper @Inject constructor(@ApplicationContext private val context: Context) {
 

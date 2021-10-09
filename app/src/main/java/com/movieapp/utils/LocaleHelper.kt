@@ -5,6 +5,9 @@ import android.content.Context
 import android.os.Build
 import java.util.*
 
+/**
+ * Helper class to manage Language configurations
+ */
 object LocaleHelper {
 
     fun onAttach(context: Context?): Context? {

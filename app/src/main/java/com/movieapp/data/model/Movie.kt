@@ -7,7 +7,8 @@ import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 
 /**
- * Data Class for All Movie details
+ * Data Class for All Movie details, This class will be used for both getting data from API & also
+ * as Data Table for Local Room DB
  *
  * @property id
  * @property title

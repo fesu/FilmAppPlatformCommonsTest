@@ -12,7 +12,15 @@ import com.movieapp.data.model.Movie
 import com.movieapp.databinding.MovieListItemBinding
 import java.util.*
 
-
+/**
+ * RecyclerView Adapter class to set values on Movie List on home screen
+ *
+ * @constructor
+ * TODO
+ *
+ * @param movieList
+ * @param context
+ */
 class MoviesAdapter(movieList: ArrayList<Movie>?, context: Context) :
     RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
