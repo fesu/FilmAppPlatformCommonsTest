@@ -54,31 +54,10 @@ class MyWorker @AssistedInject constructor(
             mainRepository.getMovies().let {
                 if (it.isSuccessful) {
                     it.body()?.let { it1 -> roomDbHelper.cacheDataToRoomDB(it1) }
-                    displayNotification("Data Sync", "Data has been synced successfully.")
                 } else {
-                    displayNotification("Data Sync", "Data Failed to sync, It will try again after 30 minutes")
                     Log.d("Worker", "Failed to sync data after 30 Minutes")
                 }
             }
         }
-    }
-
-    private fun displayNotification(title: String, task: String) {
-        val notificationManager =
-            applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                "notif_id",
-                "notif_name",
-                NotificationManager.IMPORTANCE_DEFAULT
-            )
-            notificationManager.createNotificationChannel(channel)
-        }
-        val notification: NotificationCompat.Builder =
-            NotificationCompat.Builder(applicationContext, "notif_id")
-                .setContentTitle(title)
-                .setContentText(task)
-                .setSmallIcon(R.mipmap.ic_launcher)
-        notificationManager.notify(1, notification.build())
     }
 }
