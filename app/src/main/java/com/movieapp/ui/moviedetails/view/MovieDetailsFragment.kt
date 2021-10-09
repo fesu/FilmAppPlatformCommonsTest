@@ -1,6 +1,5 @@
 package com.movieapp.ui.moviedetails.view
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,10 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
-import com.movieapp.R
 import com.movieapp.data.model.Movie
 import com.movieapp.databinding.FragmentMovieDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint

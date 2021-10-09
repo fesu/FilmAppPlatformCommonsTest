@@ -1,13 +1,14 @@
 package com.movieapp.ui.home.viewmodel
 
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.movieapp.data.model.Movie
-import com.movieapp.utils.NetworkHelper
 import com.movieapp.data.repository.MainRepository
 import com.movieapp.data.roomdb.RoomDbHelper
+import com.movieapp.utils.NetworkHelper
 import com.movieapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -38,6 +39,7 @@ class HomeViewModel @Inject constructor(
                 mainRepository.getMovies().let {
                     if (it.isSuccessful) {
                         _movies.postValue(Resource.success(it.body()))
+                        it.body()?.let { it1 -> roomDbHelper.cacheDataToRoomDB(it1) }
                     } else _movies.postValue(Resource.error(it.errorBody().toString(), null))
                 }
             } else {

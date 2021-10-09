@@ -2,17 +2,23 @@ package com.movieapp
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.movieapp.databinding.ActivityMainBinding
 import com.movieapp.utils.LocaleHelper
+import com.movieapp.workmanager.MyWorker
 import com.movieapp.utils.PrefSettings
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.TimeUnit
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -40,30 +46,28 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         setTheme()
-//        setLanguage()
+        setupWorkManager()
+    }
+
+    private fun setupWorkManager() {
+//        val workRequest = OneTimeWorkRequest.Builder(MyWorker::class.java).build()
+
+        val periodicWorkRequest =
+            PeriodicWorkRequest.Builder(MyWorker::class.java, 30, TimeUnit.MINUTES)
+                .build()
+        //Enqueuing the work request
+        WorkManager.getInstance(this).enqueue(periodicWorkRequest)
+
+        //Listening to the work status
+        WorkManager.getInstance(this).getWorkInfoByIdLiveData(periodicWorkRequest.id)
+            .observe(this, {
+                Log.d("Worker", it.state.name.trimIndent())
+            })
+
     }
 
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(LocaleHelper.onAttach(newBase));
-    }
-
-    private fun setLanguage() {
-        try {
-            var selectedLanguage: String? = null
-            // Get previously Selected language by User
-            selectedLanguage = LocaleHelper.getLocale(this)
-            if (selectedLanguage != null) {
-                if (selectedLanguage == "en") {
-                    LocaleHelper.setLocale(this, "en")
-                }
-                else{
-                    LocaleHelper.setLocale(this, "fr")
-                }
-            }
-        }
-        catch (e:Exception){
-            e.printStackTrace()
-        }
     }
 
     private fun setTheme() {

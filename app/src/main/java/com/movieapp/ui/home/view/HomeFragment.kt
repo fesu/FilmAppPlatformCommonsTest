@@ -79,8 +79,6 @@ class HomeFragment : Fragment() {
 
     private fun renderList() {
         try {
-            val roomDbHelper = RoomDbHelper(requireContext())
-            roomDbHelper.cacheDataToRoomDB(allMovies)
             adapter.addData(allMovies)
             adapter.notifyDataSetChanged()
 
